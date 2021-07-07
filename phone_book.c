@@ -96,7 +96,7 @@ void free_entries(entry *p) {
   /* TBD */
   entry *tmp = NULL;
   while(p!=NULL){
-    tmp p->next;
+    tmp = p->next;
     free(p);
     p=tmp;
   }
@@ -218,7 +218,7 @@ int delete(FILE *db_file, char *name) {
       */
 
       /* TBD */
-      if(pre == NULL){
+      if(prev == NULL){
       del = p;
       base = p->next;
       p = p->next;
