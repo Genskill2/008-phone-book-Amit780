@@ -197,7 +197,7 @@ void add(char *name, char *phone) {
 }
 
 void list(FILE *db_file) {
-int c;
+int c =0;
   entry *p = load_entries(db_file);
   entry *base = p;
   
