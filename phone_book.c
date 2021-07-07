@@ -206,7 +206,7 @@ int c =0;
     p=p->next;
     c++;
   }
-  printf("Total entries : %i\n", c);
+  printf("Total entries: %i\n", c);
   /* TBD print total count */
   free_entries(base);
 }
