@@ -94,6 +94,13 @@ FILE *open_db_file() {
   
 void free_entries(entry *p) {
   /* TBD */
+  entry *tmp = NULL;
+  while(p!=NULL){
+    tmp p->next;
+    free(p);
+    p=tmp;
+  }
+  p = NULL;
   printf("Memory is not being freed. This needs to be fixed!\n");  
 }
 
@@ -198,6 +205,7 @@ int delete(FILE *db_file, char *name) {
   int deleted = 0;
   while (p!=NULL) {
     if (strcmp(p->name, name) == 0) {
+    
       /* Matching node found. Delete it from the linked list.
          Deletion from a linked list like this
    
@@ -210,9 +218,41 @@ int delete(FILE *db_file, char *name) {
       */
 
       /* TBD */
+      if(pre == NULL){
+      del = p;
+      base = p->next;
+      p = p->next;
+      free(del);
+ 
     }
+    else{
+    prev ->next = p->next;
+    free(p);
+    }
+    deleted++;
+    break;
+  }
+  if(!deleted){
+  prev =p;
+  p = p->next;
+  }
   }
   write_all_entries(base);
   free_entries(base);
   return deleted;
+}
+ int search(FILE *db_file, char *name){
+  entry *p = load_entries(db_file);
+  entry *base = p;
+  int found = 0;
+  while (p!=NULL) {
+    if (strcmp(p->name, name) == 0) {
+      printf("%10s\n", p->phone);
+      found++;
+      break;
+    }
+	p=p->next;
+  }
+  free_entries(base);
+	return found;
 }
